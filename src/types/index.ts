@@ -1,7 +1,7 @@
 import { FILTERS, PAYMENT_FREQUENCIES } from "../consts";
 
-type PayFrequency = typeof PAYMENT_FREQUENCIES;
-type Filters = (typeof FILTERS)[keyof typeof FILTERS];
+export type PayFrequency = typeof PAYMENT_FREQUENCIES;
+export type Filters = (typeof FILTERS)[keyof typeof FILTERS];
 
 export type CalculateFuncParams<T extends keyof PayFrequency> = {
   amount: number;

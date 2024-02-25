@@ -1,5 +1,5 @@
 import { FILTERS } from "./consts";
-import { CalculatePayment, DailyParams } from "./types";
+import { CalculatePayment, DailyParams, Filters } from "./types";
 
 /**
  * La clase `PayCraft` proporciona métodos para calcular los montos de pago en base a diferentes frecuencias.
@@ -117,8 +117,8 @@ class PayCraft {
    * @param {string} filter - Filtra el resultado
    * @throws {Error} si el filtro es inválido.
    */
-  private static _validateFilter(filter: string): void {
-    if (!Object.keys(FILTERS).includes(filter)) {
+  private static _validateFilter(filter: Filters): void {
+    if (!Object.values(FILTERS).includes(filter)) {
       throw new Error(`Filtro invalido: ${filter}`);
     }
   }
