@@ -3,13 +3,14 @@ on:
   push:
     branches:
       - "**"
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2
         with:
           version: 8
       - uses: actions/setup-node@v3
@@ -19,3 +20,20 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint && pnpm run build
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm run test
